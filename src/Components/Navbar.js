@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { auth } from '../Config/firebase'; // Import Firebase auth
-
+import Swal from 'sweetalert2';
 export default function Navbar() {
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
@@ -17,7 +17,8 @@ export default function Navbar() {
 
     const handleLogout = async () => {
         await auth.signOut();
-        navigate('/login');
+        navigate('/');
+        Swal.fire("Success","Logget Out!!","success")
     };
 
     return (
@@ -43,7 +44,7 @@ export default function Navbar() {
                             <button className='btn btn-outline-danger' onClick={handleLogout}>Logout</button>
                         ) : (
                             <form className="d-flex">
-                                <Link className="btn btn-outline-primary mx-2" to="/login" role="button">Login</Link>
+                                <Link className="btn btn-outline-primary mx-2" to="/" role="button">Login</Link>
                                 <Link className="btn btn-outline-info mx-2" to="/register" role="button">Signup</Link>
                             </form>
                         )}
